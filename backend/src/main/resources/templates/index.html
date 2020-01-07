@@ -49,8 +49,9 @@ var app2 = new Vue({
 })
 
 function switchLed(b) {
+  var v = (b ? 'on' : 'off');
   axios
-    .get('https://pgy.no-ip.hu/exec/?command=magic-home+192.168.1.5+' + (b ? 'on' : 'off'));
+    .get('https://pgy.no-ip.hu/exec/?command=magic-home+'+v+'+192.168.1.5');
 }
 
 </script>
