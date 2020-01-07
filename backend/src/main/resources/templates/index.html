@@ -21,6 +21,9 @@
         <button class="uk-button uk-button-primary" id="on" v-on:click="onClick">Be</button>
     </div>
 </div>
+<div class="uk-margin-small">
+    <input id="range" class="uk-range" type="range" min="0" max="255" step="1" v-on:change="onChange">
+</div>
 
 <script>
 
@@ -47,6 +50,18 @@ var app2 = new Vue({
     }
   }	
 })
+
+var app2 = new Vue({
+	  el: '#range',
+	  methods: {
+	    onChange: function () {
+	      var v = this.$el.value;
+	      axios
+	        .get('https://pgy.no-ip.hu/exec/?command=magic-home+color+192.168.1.5+' + v + '+' + v + '+' + v);
+	      
+	    }
+	  }	
+	})
 
 function switchLed(b) {
   var v = (b ? 'on' : 'off');
