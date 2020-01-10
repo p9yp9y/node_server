@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<jxb:bindings version="1.0"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jxb:extensionBindingPrefixes="xjc"
+	xmlns:annox="http://annox.dev.java.net"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<jxb:bindings schemaLocation="http://schemas.sportradar.com/bsa/tennis/v1/xml/includes/tennis/result.xsd">
+		<jxb:bindings node="//xs:complexType[@name='results']">
+			<annox:annotate target="class">
+				<annox:annotate
+					annox:class="javax.xml.bind.annotation.XmlRootElement"
+					name="results" />
+			</annox:annotate>
+		</jxb:bindings>
+
+	</jxb:bindings>
+</jxb:bindings>
