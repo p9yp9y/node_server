@@ -3,6 +3,7 @@ package com.github.p9yp9y.nodeserver.service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,8 +32,8 @@ public class TennisinfoService {
 			JAXBContext context = JAXBContext.newInstance(Results.class);
 			Results results = (Results) context.createUnmarshaller().unmarshal(new URL(getResultUrl(date)));
 
-			Map<Object, List<Result>> map =
-					results.getResult().stream().collect(Collectors.groupingBy(r -> r.getSportEvent().get(0).getTournament().getId()));
+			Map<Object, List<Result>> map = results.getResult().stream()
+					.collect(Collectors.groupingBy(r -> r.getSportEvent().get(0).getTournament().getId()));
 			return map;
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
@@ -53,18 +54,26 @@ public class TennisinfoService {
 		return String.format(URL, date, "schedule");
 	}
 
-	public String getResultsContent(final String date) throws IOException {
-		String res = "";
+	public List<Object[][]> getResultsContent(final String date) throws IOException {
+		List<Object[][]> res = new ArrayList<Object[][]>();
 		Map<Object, List<Result>> map = getResults(date);
 
-		for (Object key : map.keySet()) {
-			for (Result result : map.get(key)) {
-				SportEventStatus sportEventStatus = result.getSportEventStatus().get(0);
-				List<PlayerCompetitor> players = result.getSportEvent().get(0).getCompetitors().getPlayer();
-				if (!players.isEmpty()) {
-					System.out.println(players.get(0).getName() + "-" + players.get(1).getName());
-					System.out.println(sportEventStatus.getHomeScore() + "-" + sportEventStatus.getAwayScore());
-				}
+		Object key = "sr:tournament:31263";
+
+		for (Result result : map.get(key)) {
+			SportEventStatus sportEventStatus = result.getSportEventStatus().get(0);
+			String winnerId = sportEventStatus.getWinnerId();
+			List<PlayerCompetitor> players = result.getSportEvent().get(0).getCompetitors().getPlayer();
+			if (!players.isEmpty() && "closed".equals(result.getSportEventStatus().get(0).getStatus())) {
+				PlayerCompetitor playerCompetitor1 = players.get(0);
+				Object[] p1 = new Object[] { playerCompetitor1.getName(),
+						playerCompetitor1.getId().equals(winnerId) ? "bold" : "", sportEventStatus.getHomeScore(),
+						sportEventStatus.getPeriodScores() };
+				PlayerCompetitor playerCompetitor2 = players.get(1);
+				Object[] p2 = new Object[] { playerCompetitor2.getName(),
+						playerCompetitor2.getId().equals(winnerId) ? "bold" : "", sportEventStatus.getAwayScore(),
+						sportEventStatus.getPeriodScores() };
+				res.add(new Object[][] { p1, p2 });
 			}
 		}
 

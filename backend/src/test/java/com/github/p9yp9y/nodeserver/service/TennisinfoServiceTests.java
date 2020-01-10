@@ -8,6 +8,6 @@ public class TennisinfoServiceTests {
 
 	@Test
 	public void getResultsContent() throws IOException {
-		new TennisinfoService().getResultsContent("2020-01-10");
+		new TennisinfoService().getResults("2020-01-10");
 	}
 }
