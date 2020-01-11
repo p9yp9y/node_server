@@ -1,54 +1,65 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Tennis Info</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-    <style type="text/css">
-    	body {
-    		font-family: 'Roboto';
-    		font-size: 16px; 
-    	}
-    	table {
-			background: #eeeeee;
-			color: #222222;
-		}
-		.row {
-			margin-left: auto;
-			margin-right: auto;
-			width: 200px;
-		}
-		.bold {
-			font-weight: bold;
-		}
-    </style>
+<title>Tennis Info</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href='https://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet'>
+<style type="text/css">
+body {
+	font-family: 'Roboto';
+	font-size: 16px;
+}
+
+table {
+	background: #eeeeee;
+	color: #222222;
+}
+
+.row, .content {
+	margin-left: auto;
+	margin-right: auto;
+	width: 250px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+#time {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+</style>
 </head>
 <body>
 
-<div id="content">
-<div th:each="result : ${results}" class="row">
-<table>
-  <tr>
-    <td th:class="${result[0][1]}" th:text="${result[0][0]}" />
-    <td class="bold" th:text="${result[0][2]}" />
-    <th:block th:if="${result[0][3] != null}">
-    	<th:block th:each="ps : ${result[0][3].periodScore}">
-	    	<td th:text="${ps.homeScore}" />
-    	</th:block>
-    </th:block>
-  </tr>
-  <tr>
-    <td th:class="${result[1][1]}" th:text="${result[1][0]}" />
-    <td class="bold" th:text="${result[1][2]}" />
-    <th:block th:if="${result[1][3] != null}">
-    	<th:block th:each="ps : ${result[1][3].periodScore}">
-	    	<td th:text="${ps.awayScore}" />
-    	</th:block>
-    </th:block>
-  </tr>
-</table>
-<br>
-</div>
-</div>
+	<div class="content">
+		<p id="time" th:text="${time}" />
+		<div th:each="result : ${results}" class="row">
+			<table>
+				<tr>
+					<td th:class="${result[0][1]}" th:text="${result[0][0]}" />
+					<td class="bold" th:text="${result[0][2]}" />
+					<th:block th:if="${result[0][3] != null}">
+						<th:block th:each="ps : ${result[0][3].periodScore}">
+							<td th:text="${ps.homeScore}" />
+						</th:block>
+					</th:block>
+				</tr>
+				<tr>
+					<td th:class="${result[1][1]}" th:text="${result[1][0]}" />
+					<td class="bold" th:text="${result[1][2]}" />
+					<th:block th:if="${result[1][3] != null}">
+						<th:block th:each="ps : ${result[1][3].periodScore}">
+							<td th:text="${ps.awayScore}" />
+						</th:block>
+					</th:block>
+				</tr>
+			</table>
+			<br>
+		</div>
+	</div>
 </body>
 </html>

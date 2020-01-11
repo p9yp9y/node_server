@@ -2,6 +2,7 @@ package com.github.p9yp9y.nodeserver.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -15,16 +16,18 @@ import com.sportradar.schemas.sportsapi.v1.tennis.Result;
 
 @Controller
 public class TennisinfoController {
-	final private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	final private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	
+	final private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
 	@Autowired
 	private TennisinfoService tennisinfoService;
 
 	@RequestMapping(value = "/tennisinfo")
 	public String tennisinfo(final Model model) throws IOException {
-		Object key = "sr:tournament:31263";
 		 List<Object[][]> results = tennisinfoService.getResultsContent(today());
 		model.addAttribute("results", results);
+		model.addAttribute("time", LocalDateTime.now().format(timeFormatter));
 		return "tennisinfo";
 	}
 
@@ -32,6 +35,6 @@ public class TennisinfoController {
 
 
 	private String today() {
-		return LocalDate.now().format(formatter);
+		return LocalDate.now().format(dateFormatter);
 	}
 }
