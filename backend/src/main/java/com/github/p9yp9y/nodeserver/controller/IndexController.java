@@ -13,10 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class IndexController {
-	@Value("${otp.azonosito}")
+	@Value("${otp.azonosito:}")
 	private String azonosito;
 	
-	@Value("${otp.telekod}")
+	@Value("${otp.telekod:}")
 	private String telekod;
 	
 	@RequestMapping(value = "/")
