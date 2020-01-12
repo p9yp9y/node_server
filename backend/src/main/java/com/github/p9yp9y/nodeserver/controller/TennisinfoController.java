@@ -33,7 +33,6 @@ public class TennisinfoController {
 
 	// sport_event[@status="not_started"]/season[@tournament_id="sr:tournament:31263"]/..
 
-
 	private String today() {
 		return LocalDate.now().format(dateFormatter);
 	}
