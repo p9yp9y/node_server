@@ -60,20 +60,23 @@ public class TennisinfoService {
 
 		Object key = "sr:tournament:31263";
 
-		for (Result result : map.get(key)) {
-			SportEventStatus sportEventStatus = result.getSportEventStatus().get(0);
-			String winnerId = sportEventStatus.getWinnerId();
-			List<PlayerCompetitor> players = result.getSportEvent().get(0).getCompetitors().getPlayer();
-			if (!players.isEmpty() && "closed".equals(result.getSportEventStatus().get(0).getStatus())) {
-				PlayerCompetitor playerCompetitor1 = players.get(0);
-				Object[] p1 = new Object[] { playerCompetitor1.getName(),
-						playerCompetitor1.getId().equals(winnerId) ? "bold" : "", sportEventStatus.getHomeScore(),
-						sportEventStatus.getPeriodScores() };
-				PlayerCompetitor playerCompetitor2 = players.get(1);
-				Object[] p2 = new Object[] { playerCompetitor2.getName(),
-						playerCompetitor2.getId().equals(winnerId) ? "bold" : "", sportEventStatus.getAwayScore(),
-						sportEventStatus.getPeriodScores() };
-				res.add(new Object[][] { p1, p2 });
+		List<Result> list = map.get(key);
+		if (list != null) {
+			for (Result result : list) {
+				SportEventStatus sportEventStatus = result.getSportEventStatus().get(0);
+				String winnerId = sportEventStatus.getWinnerId();
+				List<PlayerCompetitor> players = result.getSportEvent().get(0).getCompetitors().getPlayer();
+				if (!players.isEmpty() && "closed".equals(result.getSportEventStatus().get(0).getStatus())) {
+					PlayerCompetitor playerCompetitor1 = players.get(0);
+					Object[] p1 = new Object[] { playerCompetitor1.getName(),
+							playerCompetitor1.getId().equals(winnerId) ? "bold" : "", sportEventStatus.getHomeScore(),
+							sportEventStatus.getPeriodScores() };
+					PlayerCompetitor playerCompetitor2 = players.get(1);
+					Object[] p2 = new Object[] { playerCompetitor2.getName(),
+							playerCompetitor2.getId().equals(winnerId) ? "bold" : "", sportEventStatus.getAwayScore(),
+							sportEventStatus.getPeriodScores() };
+					res.add(new Object[][] { p1, p2 });
+				}
 			}
 		}
 
