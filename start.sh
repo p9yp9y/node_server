@@ -1,7 +1,7 @@
 #!/bin/bash
 
 restart() {
-	pkill -f 'start_node_server.sh'
+	pkill -f 'node_server'
 	java -jar -Dspring.config.location=~/.config/node_server/application.properties target/node_server-*.jar &
 }
 
