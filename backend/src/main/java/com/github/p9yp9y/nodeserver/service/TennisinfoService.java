@@ -55,10 +55,10 @@ public class TennisinfoService {
 	}
 
 	public List<Object[][]> getResultsContent(final String date) throws IOException {
-		List<Object[][]> res = new ArrayList<Object[][]>();
+		List<Object[][]> res = new ArrayList<>();
 		Map<Object, List<Result>> map = getResults(date);
 
-		Object key = "sr:tournament:31263";
+		Object key = "sr:tournament:31359";
 
 		List<Result> list = map.get(key);
 		if (list != null) {
