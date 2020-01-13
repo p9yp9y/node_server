@@ -11,7 +11,7 @@ init() {
 			echo 'no changes'
 		else
 			git pull
-			mvn package
+			mvn -DskipTests package
 			restart
 		fi
 		sleep 60
