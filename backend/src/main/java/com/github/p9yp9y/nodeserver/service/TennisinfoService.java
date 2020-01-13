@@ -21,7 +21,7 @@ import com.sportradar.schemas.sportsapi.v1.tennis.SportEventStatus;
 
 @Service
 public class TennisinfoService {
-	private final String URL = "https://api.sportradar.com/tennis-t2/en/schedules/%s/%s.xml?api_key=36m6b2qn2e5mshe7phj9vws8";
+	private final String URL = "https://api.sportradar.com/tennis-t2/en/schedules/%s/%s.xml?api_key=k5guk3nmk94b8dauat7ewwzp";
 
 	@Autowired
 	private HttpService httpService;
