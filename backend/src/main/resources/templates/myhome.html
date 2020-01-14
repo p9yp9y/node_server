@@ -27,6 +27,8 @@
 
 <script>
 
+var url = 'https://pgy.no-ip.hu/exec/?command=/home/pi/n/bin/magic-home+';
+
 var app1 = new Vue({
   el: '#off',
   data: {
@@ -57,7 +59,7 @@ var app2 = new Vue({
 	    onChange: function () {
 	      var v = this.$el.value;
 	      axios
-	        .get('https://pgy.no-ip.hu/exec/?command=magic-home+color+192.168.1.5+' + v + '+' + v + '+' + v);
+	        .get(url + 'color+192.168.1.5+' + v + '+' + v + '+' + v);
 	      
 	    }
 	  }	
@@ -66,7 +68,7 @@ var app2 = new Vue({
 function switchLed(b) {
   var v = (b ? 'on' : 'off');
   axios
-    .get('https://pgy.no-ip.hu/exec/?command=magic-home+'+v+'+192.168.1.5');
+    .get(url + v + '+192.168.1.5');
 }
 
 </script>
