@@ -1,0 +1,6 @@
+
+otp.azonosito=2206118991
+otp.telekod=861
+staticResourceLocation=file:///home/pi/daily-music/
+logging.level.=DEBUG
+logging.path=/tmp/node_server.log
