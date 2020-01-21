@@ -2,7 +2,7 @@
 
 restart() {
 	pkill -f 'node_server'
-	java -jar -Dspring.config.location=~/.config/node_server/application.properties target/node_server-*.jar &
+	java -jar -Dspring.config.location=/home/pi/.config/node_server/application.properties target/node_server-*.jar &
 }
 
 init() {
@@ -20,4 +20,4 @@ init() {
 
 cd backend
 restart
-init
+#init
