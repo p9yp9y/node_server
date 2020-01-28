@@ -54,13 +54,11 @@ public class TennisinfoService {
 		return String.format(URL, date, "schedule");
 	}
 
-	public List<Object[][]> getResultsContent(final String date) throws IOException {
+	public List<Object[][]> getResultsContent(final String date, final String tournamentId) throws IOException {
 		List<Object[][]> res = new ArrayList<>();
 		Map<Object, List<Result>> map = getResults(date);
 
-		Object key = "sr:tournament:31359";
-
-		List<Result> list = map.get(key);
+		List<Result> list = map.get("sr:tournament:" + tournamentId);
 		if (list != null) {
 			for (Result result : list) {
 				SportEventStatus sportEventStatus = result.getSportEventStatus().get(0);

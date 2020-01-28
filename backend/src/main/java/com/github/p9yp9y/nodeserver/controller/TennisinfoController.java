@@ -7,25 +7,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.p9yp9y.nodeserver.service.TennisinfoService;
-import com.sportradar.schemas.sportsapi.v1.tennis.Result;
 
 @Controller
 public class TennisinfoController {
 	final private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	
+
 	final private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+	@Value("${tournamentId}")
+	private String tournamentId;
 
 	@Autowired
 	private TennisinfoService tennisinfoService;
 
 	@RequestMapping(value = "/tennisinfo")
 	public String tennisinfo(final Model model) throws IOException {
-		 List<Object[][]> results = tennisinfoService.getResultsContent(today());
+		List<Object[][]> results = tennisinfoService.getResultsContent(today(), tournamentId);
 		model.addAttribute("results", results);
 		model.addAttribute("time", LocalDateTime.now().format(timeFormatter));
 		return "tennisinfo";
