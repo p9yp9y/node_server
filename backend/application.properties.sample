@@ -4,3 +4,5 @@ otp.telekod=
 staticResourceLocation=
 logging.level.=DEBUG
 logging.path=/tmp/node_server
+
+tournamentId=
