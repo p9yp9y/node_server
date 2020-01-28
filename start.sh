@@ -6,18 +6,18 @@ restart() {
 }
 
 init() {
-	while true; do
-		if [[ `git status --porcelain` ]]; then
-			echo 'no changes'
-		else
+#	while true; do
+#		if [[ `git status --porcelain` ]]; then
+#			echo 'no changes'
+#		else
 			git pull
 			mvn -DskipTests package
 			restart
-		fi
-		sleep 60
-	done
+#		fi
+#		sleep 60
+#	done
 }
 
 cd backend
-restart
-#init
+#restart
+init
