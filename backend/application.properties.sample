@@ -5,4 +5,7 @@ staticResourceLocation=
 logging.level.=DEBUG
 logging.path=/tmp/node_server
 
+management.endpoints.enabled-by-default=true
+management.endpoint.info.enabled=true
+
 tournamentId=
