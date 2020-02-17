@@ -2,7 +2,10 @@
 <head>
 <!-- UIkit CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css" />
-<link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}" />
+
+<link rel="stylesheet" href="/resources/css/style.css" />
+
+
 <!-- UIkit JS -->
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
@@ -13,16 +16,25 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
-<body style="zoom: 150%;">
+<body>
 
-<div class="uk-margin-small">
-    <div class="uk-button-group">
-        <button class="uk-button uk-button-primary" id="off" v-on:click="onClick">Ki</button>
-        <button class="uk-button uk-button-primary" id="on" v-on:click="onClick">Be</button>
-    </div>
-</div>
-<div class="uk-margin-small">
-    <input id="range" class="uk-range" type="range" min="0" max="255" step="1" v-on:change="onChange">
+<div class="uk-margin-large-left uk-margin-large-right">
+	<div class="uk-margin-large-top">
+	    <div class="uk-button-group">
+	        <button class="uk-button uk-button-primary" id="off" v-on:click="onClick">Ki</button>
+	        <button class="uk-button uk-button-primary" id="on" v-on:click="onClick">Be</button>
+	    </div>
+	</div>
+	<div class="uk-margin-large-top">
+	    <input id="range" class="uk-range" type="range" min="0" max="255" step="1" v-on:change="onChange">
+	</div>
+	
+	<div class="uk-margin-large-top">
+		<a class="weatherwidget-io" href="https://forecast7.com/hu/47d5019d04/budapest/" data-label_1="BUDAPEST" data-label_2="WEATHER" data-theme="original" >BUDAPEST WEATHER</a>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>
+	</div>
 </div>
 
 <script>
@@ -72,7 +84,7 @@ function switchLed(b) {
 }
 
 </script>
-OK
+
 </body>
 
 </html>
