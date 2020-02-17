@@ -21,11 +21,18 @@
 <div id="app" class="uk-margin-large-left uk-margin-large-right">
 	<div class="uk-margin-large-top">
 	    <div class="uk-button-group">
+	        <button class="uk-button uk-button-primary" v-on:click="switchLedOld(false)">Ki</button>
+	        <button class="uk-button uk-button-primary" v-on:click="switchLedOld(true)">Be</button>
+	    </div>
+	</div>
+		<div class="uk-margin-large-top">
+	    <div class="uk-button-group">
 	        <button class="uk-button uk-button-primary" v-on:click="switchLed(false)">Ki</button>
 	        <button class="uk-button uk-button-primary" v-on:click="switchLed(true)">Be</button>
 	    </div>
-	    
-	   <div class="uk-button-group uk-margin-large-left">
+	</div>
+	<div class="uk-margin-small-top">
+	   <div class="uk-button-group">
 	        <button class="uk-button uk-button-primary" v-on:click="changeValue(1)">1</button>
 	        <button class="uk-button uk-button-primary" v-on:click="changeValue(31)">2</button>
 	        <button class="uk-button uk-button-primary" v-on:click="changeValue(127)">3</button>
@@ -46,7 +53,7 @@
 
 <script>
 
-var url = 'https://pgy.no-ip.hu/exec/?command=/home/pi/n/bin/magic-home+';
+var url = 'https://pgy.no-ip.hu/';
 
 var app = new Vue({
   el: '#app',
@@ -60,15 +67,20 @@ var app = new Vue({
   },
   methods: {
     switchLed: function (b) {
+     	  var v = (b ? 'on' : 'off');
+     	  axios
+     	    .get(url + 'magichome/' + v);
+    },
+    switchLedOld: function (b) {
    	  var v = (b ? 'on' : 'off');
    	  axios
-   	    .get(url + v + '+192.168.1.5');
+   	    .get(url + 'exec/?command=/home/pi/n/bin/magic-home+' + v + '+192.168.1.5');
     },
     onChangeValue: function() {
     	this.changeValue(this.val);
     },
     changeValue: function(v) {
-      axios.get(url + 'color+192.168.1.5+' + v + '+' + v + '+' + v);
+      axios.get(url + 'exec/?command=/home/pi/n/bin/magic-home+' + 'color+192.168.1.5+' + v + '+' + v + '+' + v);
     }
   }
 })
