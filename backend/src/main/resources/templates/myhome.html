@@ -18,15 +18,22 @@
 
 <body>
 
-<div class="uk-margin-large-left uk-margin-large-right">
+<div id="app" class="uk-margin-large-left uk-margin-large-right">
 	<div class="uk-margin-large-top">
 	    <div class="uk-button-group">
-	        <button class="uk-button uk-button-primary" id="off" v-on:click="onClick">Ki</button>
-	        <button class="uk-button uk-button-primary" id="on" v-on:click="onClick">Be</button>
+	        <button class="uk-button uk-button-primary" v-on:click="switchLed(false)">Ki</button>
+	        <button class="uk-button uk-button-primary" v-on:click="switchLed(true)">Be</button>
+	    </div>
+	    
+	   <div class="uk-button-group uk-margin-large-left">
+	        <button class="uk-button uk-button-primary" v-on:click="changeValue(1)">1</button>
+	        <button class="uk-button uk-button-primary" v-on:click="changeValue(31)">2</button>
+	        <button class="uk-button uk-button-primary" v-on:click="changeValue(127)">3</button>
+	        <button class="uk-button uk-button-primary" v-on:click="changeValue(255)">4</button>
 	    </div>
 	</div>
 	<div class="uk-margin-large-top">
-	    <input id="range" class="uk-range" type="range" min="0" max="255" step="1" v-on:change="onChange">
+	    <input v-model="myValue" class="uk-range" type="range" min="0" max="255" step="1" v-on:change="onChangeValue">
 	</div>
 	
 	<div class="uk-margin-large-top">
@@ -41,47 +48,30 @@
 
 var url = 'https://pgy.no-ip.hu/exec/?command=/home/pi/n/bin/magic-home+';
 
-var app1 = new Vue({
-  el: '#off',
+var app = new Vue({
+  el: '#app',
   data: {
-    message: 'Kikapcsol'
+	myValue: 150  
+  },
+  watch: {
+	  'myValue': function(val, oldVal) {
+		  this.val = val;
+	  }
   },
   methods: {
-    onClick: function () {
-      switchLed(false);
+    switchLed: function (b) {
+   	  var v = (b ? 'on' : 'off');
+   	  axios
+   	    .get(url + v + '+192.168.1.5');
+    },
+    onChangeValue: function() {
+    	this.changeValue(this.val);
+    },
+    changeValue: function(v) {
+      axios.get(url + 'color+192.168.1.5+' + v + '+' + v + '+' + v);
     }
-  }	
+  }
 })
-
-var app2 = new Vue({
-  el: '#on',
-  data: {
-    message: 'Bekapcsol'
-  },
-  methods: {
-    onClick: function () {
-      switchLed(true);
-    }
-  }	
-})
-
-var app2 = new Vue({
-	  el: '#range',
-	  methods: {
-	    onChange: function () {
-	      var v = this.$el.value;
-	      axios
-	        .get(url + 'color+192.168.1.5+' + v + '+' + v + '+' + v);
-	      
-	    }
-	  }	
-	})
-
-function switchLed(b) {
-  var v = (b ? 'on' : 'off');
-  axios
-    .get(url + v + '+192.168.1.5');
-}
 
 </script>
 
