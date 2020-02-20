@@ -19,13 +19,8 @@
 <body>
 
 <div id="app" class="uk-margin-large-left uk-margin-large-right">
+
 	<div class="uk-margin-large-top">
-	    <div class="uk-button-group">
-	        <button class="uk-button uk-button-primary" v-on:click="switchLedOld(false)">Ki</button>
-	        <button class="uk-button uk-button-primary" v-on:click="switchLedOld(true)">Be</button>
-	    </div>
-	</div>
-		<div class="uk-margin-large-top">
 	    <div class="uk-button-group">
 	        <button class="uk-button uk-button-primary" v-on:click="switchLed(false)">Ki</button>
 	        <button class="uk-button uk-button-primary" v-on:click="switchLed(true)">Be</button>
@@ -49,7 +44,17 @@
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 </script>
 	</div>
+
+	<div class="uk-margin-large-top">
+	    <div class="uk-button-group">
+	        <button class="uk-button uk-button-primary" v-on:click="switchLedOld(false)">Ki</button>
+	        <button class="uk-button uk-button-primary" v-on:click="switchLedOld(true)">Be</button>
+	    </div>
+	</div>
+
 </div>
+
+
 
 <script>
 
