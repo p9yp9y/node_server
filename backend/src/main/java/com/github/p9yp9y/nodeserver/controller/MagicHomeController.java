@@ -48,7 +48,7 @@ public class MagicHomeController {
 
 	@RequestMapping(value = "/off")
 	public String doOff() throws UnknownHostException, IOException {
-		magicHomeService.turnLed(true);
+		magicHomeService.turnLed(false);
 		return "OK";
 	}
 
