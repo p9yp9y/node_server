@@ -23,11 +23,8 @@ public class MagicHomeService {
 
 	private String host;
 
-	private Thread connectionThread;
-
 	public void connect(final String host) throws IOException {
 		this.host = host;
-		reconnect();
 	}
 
 	public void turnLed(final boolean on) throws IOException {
@@ -40,40 +37,20 @@ public class MagicHomeService {
 		sendPackage(DatatypeConverter.parseHexBinary(data));
 	}
 
-	private void reconnect() throws IOException {
-		if (connectionThread != null) {
-			if (out != null) {
-				out.close();
-				in.close();
-				socket.close();
-			}
-		}
-		createConnectionThread();
-		connectionThread.start();
-	}
-
-	private void createConnectionThread() {
-		connectionThread = new Thread(() -> {
-			try {
-				socket = new Socket(host, 5577);
-				in = new ObservableInputStream(socket.getInputStream());
-				out = socket.getOutputStream();
-			} catch (IOException e) {
-				logger.error(e.toString(), e);
-			}
-		});
-	}
-
 	private void sendPackage(final byte[] data) throws IOException {
-		if (out == null) {
-			reconnect();
-		}
+	
 		try {
+socket = new Socket(host, 5577);
+			in = new ObservableInputStream(socket.getInputStream());
+			out = socket.getOutputStream();
+			
 			out.write(data);
 			out.flush();
+out.close();
+in.close();
+socket.close();
 		} catch (Exception e) {
 			logger.error(e.toString(), e);
-			reconnect();
 		}
 	}
 }
