@@ -79,7 +79,7 @@ var app = new Vue({
     switchLedOld: function (b) {
    	  var v = (b ? 'on' : 'off');
    	  axios
-   	    .get(url + 'exec/?command=/home/pi/n/bin/magic-home+' + v + '+192.168.1.5');
+   	    .get(url + 'exec/?command=/home/pi/tools/led' + v + '.sh');
     },
     onChangeValue: function() {
     	this.changeValue(this.val);
