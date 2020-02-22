@@ -35,7 +35,7 @@ public class MagicHomeController {
 	}
 
 	@RequestMapping(value = "/connect")
-	public String doConnect() throws UnknownHostException, IOException {
+	public String doConnect() {
 		connect();
 		return "OK";
 	}
@@ -49,6 +49,12 @@ public class MagicHomeController {
 	@RequestMapping(value = "/off")
 	public String doOff() throws UnknownHostException, IOException {
 		magicHomeService.turnLed(false);
+		return "OK";
+	}
+
+	@RequestMapping(value = "/setColor/{red}/{green}/{blue}")
+	public String doSetColor(@PathVariable byte red, @PathVariable byte green, @PathVariable byte blue) throws UnknownHostException, IOException {
+		magicHomeService.setColor(red, green, blue);
 		return "OK";
 	}
 
