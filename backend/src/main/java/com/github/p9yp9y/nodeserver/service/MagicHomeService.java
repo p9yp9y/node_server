@@ -23,7 +23,7 @@ public class MagicHomeService {
 
 	private String host;
 
-	public void connect(final String host) throws IOException {
+	public void connect(final String host) {
 		this.host = host;
 	}
 
