@@ -27,16 +27,28 @@ public class MagicHomeService {
 		this.host = host;
 	}
 
+public void setColor(byte red, byte green, byte blue) {
+String data = "31$b$b$b000f";
+data = String.format(data, red, green, blue);
+
+}
+
+
 	public void turnLed(final boolean on) throws IOException {
 		String data;
 		if (on) {
-			data = "71230fa3";
+			data = "71230f";
 		} else {
-			data = "71240fa4";
+			data = "71240f";
 		}
 		sendPackage(DatatypeConverter.parseHexBinary(data));
 	}
-
+private byte getHash(byte[] data) {
+for(int i=0; i<data.length;i++) {
+res = (res + data[i]) % 0xff;
+}
+return res;
+}
 	private void sendPackage(final byte[] data) throws IOException {
 	
 		try {
@@ -45,6 +57,7 @@ socket = new Socket(host, 5577);
 			out = socket.getOutputStream();
 			
 			out.write(data);
+out.write(getHash(data));
 			out.flush();
 out.close();
 in.close();
