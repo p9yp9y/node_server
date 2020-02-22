@@ -27,11 +27,7 @@ public class MagicHomeController {
 
 	@PostConstruct
 	public void init() {
-		try {
-			connect();
-		} catch (IOException e) {
-			logger.error(e.toString(), e);
-		}
+		connect();
 	}
 
 	@RequestMapping(value = "/connect")
