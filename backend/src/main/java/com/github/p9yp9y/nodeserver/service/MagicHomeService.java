@@ -28,9 +28,8 @@ public class MagicHomeService {
 	}
 
 public void setColor(byte red, byte green, byte blue) {
-String data = "31$b$b$b000f";
+String data = "31$b$b$b00000f";
 data = String.format(data, red, green, blue);
-
 }
 
 
@@ -44,6 +43,7 @@ data = String.format(data, red, green, blue);
 		sendPackage(DatatypeConverter.parseHexBinary(data));
 	}
 private byte getHash(byte[] data) {
+byte res = 0;
 for(int i=0; i<data.length;i++) {
 res = (res + data[i]) % 0xff;
 }
