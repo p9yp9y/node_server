@@ -28,7 +28,7 @@ public class MagicHomeService {
 	}
 
 public void setColor(byte red, byte green, byte blue) {
-String data = "31$b$b$b00000f";
+String data = "31%02x%02x%02x00000f";
 data = String.format(data, red, green, blue);
 }
 
