@@ -43,11 +43,11 @@ data = String.format(data, red, green, blue);
 		sendPackage(DatatypeConverter.parseHexBinary(data));
 	}
 private byte getHash(byte[] data) {
-byte res = 0;
+int res = 0;
 for(int i=0; i<data.length;i++) {
-res = (res + data[i]) % 0xff;
+res += data[i];
 }
-return res;
+return (byte)(res % 0xff);
 }
 	private void sendPackage(final byte[] data) throws IOException {
 	
