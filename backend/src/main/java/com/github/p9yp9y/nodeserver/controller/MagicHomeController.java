@@ -58,7 +58,7 @@ public class MagicHomeController {
 		return "OK";
 	}
 
-	private void connect() throws UnknownHostException, IOException {
+	private void connect() {
 		magicHomeService.connect(host);
 	}
 }
