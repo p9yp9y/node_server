@@ -31,7 +31,9 @@ public class MagicHomeService {
 	public void setColor(final byte red, final byte green, final byte blue) {
 		String data = "31%02x%02x%02x00000f";
 		data = String.format(data, red, green, blue);
-	}
+		
+		sendPackage(DatatypeConverter.parseHexBinary(data));
+}
 
 	public void turnLed(final boolean on) throws IOException {
 		String data;
