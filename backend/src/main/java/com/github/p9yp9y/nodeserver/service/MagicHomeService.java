@@ -54,7 +54,7 @@ public class MagicHomeService {
 	private void sendPackage(final byte[] data) throws IOException {
 
 		try {
-			socket = new Socket("localhost", 5577);
+			socket = new Socket(host, 5577);
 			in = new ObservableInputStream(socket.getInputStream());
 			out = new BufferedOutputStream(socket.getOutputStream());
 			out.write(data);
