@@ -50,9 +50,9 @@ public class MagicHomeController {
 	}
 
 	@RequestMapping(value = "/setColor/{red}/{green}/{blue}")
-	public String doSetColor(@PathVariable final byte red, @PathVariable final byte green, @PathVariable final byte blue)
+	public String doSetColor(@PathVariable final int red, @PathVariable final int green, @PathVariable final int blue)
 			throws UnknownHostException, IOException {
-		magicHomeService.setColor(red, green, blue);
+		magicHomeService.setColor((byte)red, (byte)green, (byte)blue);
 		return "OK";
 	}
 
