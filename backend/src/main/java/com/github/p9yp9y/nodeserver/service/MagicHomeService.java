@@ -28,7 +28,7 @@ public class MagicHomeService {
 		this.host = host;
 	}
 
-	public void setColor(final byte red, final byte green, final byte blue) {
+	public void setColor(final byte red, final byte green, final byte blue) throws IOException {
 		String data = "31%02x%02x%02x00000f";
 		data = String.format(data, red, green, blue);
 		
