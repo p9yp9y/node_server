@@ -1,5 +1,6 @@
 package com.github.p9yp9y.nodeserver.service;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -27,11 +28,10 @@ public class MagicHomeService {
 		this.host = host;
 	}
 
-public void setColor(byte red, byte green, byte blue) {
-String data = "31%02x%02x%02x00000f";
-data = String.format(data, red, green, blue);
-}
-
+	public void setColor(final byte red, final byte green, final byte blue) {
+		String data = "31%02x%02x%02x00000f";
+		data = String.format(data, red, green, blue);
+	}
 
 	public void turnLed(final boolean on) throws IOException {
 		String data;
@@ -42,26 +42,27 @@ data = String.format(data, red, green, blue);
 		}
 		sendPackage(DatatypeConverter.parseHexBinary(data));
 	}
-private byte getHash(byte[] data) {
-int res = 0;
-for(int i=0; i<data.length;i++) {
-res += data[i];
-}
-return (byte)(res % 0xff);
-}
+
+	public byte getHash(final byte[] data) {
+		int res = 0;
+		for (int i = 0; i < data.length; i++) {
+			res += data[i];
+		}
+		return (byte) (res % 0xff);
+	}
+
 	private void sendPackage(final byte[] data) throws IOException {
-	
+
 		try {
-socket = new Socket(host, 5577);
+			socket = new Socket("localhost", 5577);
 			in = new ObservableInputStream(socket.getInputStream());
-			out = socket.getOutputStream();
-			
+			out = new BufferedOutputStream(socket.getOutputStream());
 			out.write(data);
-out.write(getHash(data));
+			out.write(getHash(data));
 			out.flush();
-out.close();
-in.close();
-socket.close();
+			out.close();
+			in.close();
+			socket.close();
 		} catch (Exception e) {
 			logger.error(e.toString(), e);
 		}
