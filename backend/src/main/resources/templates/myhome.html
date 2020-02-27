@@ -68,6 +68,7 @@ var app = new Vue({
   watch: {
 	  'myValue': function(val, oldVal) {
 		  this.val = val;
+                  this.changeValue(this.val);
 	  }
   },
   methods: {
