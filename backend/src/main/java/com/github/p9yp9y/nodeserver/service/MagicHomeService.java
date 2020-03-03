@@ -16,13 +16,7 @@ import org.springframework.stereotype.Service;
 public class MagicHomeService {
 	private static final Logger logger = LoggerFactory.getLogger(MagicHomeService.class);
 
-	private OutputStream out;
-
-	private ObservableInputStream in;
-
-	private Socket socket;
-
-	private String host;
+    private String host;
 
 	public void connect(final String host) {
 		this.host = host;
@@ -56,9 +50,9 @@ public class MagicHomeService {
 	private void sendPackage(final byte[] data) throws IOException {
 
 		try {
-			socket = new Socket(host, 5577);
-			in = new ObservableInputStream(socket.getInputStream());
-			out = new BufferedOutputStream(socket.getOutputStream());
+			Socket socket = new Socket(host, 5577);
+			ObservableInputStream in = new ObservableInputStream(socket.getInputStream());
+			BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());
 			out.write(data);
 			out.write(getHash(data));
 			out.flush();
