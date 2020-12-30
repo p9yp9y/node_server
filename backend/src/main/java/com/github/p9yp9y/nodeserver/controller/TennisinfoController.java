@@ -8,13 +8,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.github.p9yp9y.nodeserver.service.TennisinfoService;
 
-@Controller
+@RestController
 public class TennisinfoController {
 	final private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -26,7 +26,7 @@ public class TennisinfoController {
 	@Autowired
 	private TennisinfoService tennisinfoService;
 
-	@RequestMapping(value = "/tennisinfo")
+	@GetMapping(value = "/tennisinfo")
 	public String tennisinfo(final Model model) throws IOException {
 		List<Object[][]> results = tennisinfoService.getResultsContent(today(), tournamentId);
 		model.addAttribute("results", results);

@@ -7,11 +7,13 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class IndexController {
 	@Value("${otp.azonosito:}")
 	private String azonosito;
@@ -25,14 +27,14 @@ public class IndexController {
 		return new ModelAndView("redirect:/myhome");
 	}
 
-	@RequestMapping(value = "/hello")
+	@GetMapping(value = "/hello")
 	public String hello(@RequestParam(name = "name", required = false, defaultValue = "World") final String name,
 			final Model model) throws IOException {
 		model.addAttribute("name", name);
 		return "hello";
 	}
 
-	@RequestMapping(value = "/otp")
+	@GetMapping(value = "/otp")
 	public String otp(final Model model) throws IOException {
 		Document doc = Jsoup.connect(
 				"https://www.otpbankdirekt.hu/homebank/do/bankkartyaEgyenlegLekerdezes?muvelet=login&azonosito="
